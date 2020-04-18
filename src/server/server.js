@@ -24,6 +24,11 @@ const server = () => {
                 let todo = schema.todos.find(request.params.id);
                 todo.update({done : !todo.done});
             });
+
+            this.post('/todos',(schema ,request) => {
+                let newTodo = schema.todos.create({id: uuidv4(), title: JSON.parse(request.requestBody).title, done: false });
+                return newTodo;
+            });
         }
       });
     return config;
